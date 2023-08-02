@@ -8,6 +8,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
+use backend\models\Ldap;
 
 /**
  * Site controller
@@ -72,10 +73,12 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+
+        $user = Ldap::autenticar('clspae', '70178877271');
+
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-
         $this->layout = 'blank';
 
         $model = new LoginForm();
